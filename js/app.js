@@ -13,23 +13,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const theme = localStorage.getItem('theme');
 
   if (theme) {
-    if (theme === "dark" || theme === "matrix" || theme === "eightBitDark") {
-      logo.src = "./images/logo-white.png";
-    } else if (theme === "light" || theme === "eightBitLight") {
-      logo.src = "./images/logo-black.png";
+    if (theme === 'dark' || theme === 'matrix' || theme === 'eightBitDark') {
+      logo.src = './images/logo-white.png';
+    } else if (theme === 'light' || theme === 'eightBitLight') {
+      logo.src = './images/logo-black.png';
     }
     body.classList.replace(document.body.classList.value, theme);
   }
 
   if (isSystemDark && localStorage.getItem('theme') === null) {
     body.classList.replace(document.body.classList.value, 'dark');
-    logo.src = "./images/logo-white.png";
+    logo.src = './images/logo-white.png';
     localStorage.setItem('theme', 'dark');
   }
 
   if (isSystemLight && localStorage.getItem('theme') === null) {
     body.classList.replace(document.body.classList.value, 'light');
-    logo.src = "./images/logo-black.png";
+    logo.src = './images/logo-black.png';
     localStorage.setItem('theme', 'light');
   }
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     darkButton.style.borderBottom = '1px solid var(--textColor)';
     matrix.style.borderBottom = 'none';
     eightBit.style.borderBottom = 'none';
-    logo.src = "./images/logo-white.png";
+    logo.src = './images/logo-white.png';
     localStorage.setItem('theme', 'dark');
   };
 
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     darkButton.style.borderBottom = 'none';
     matrix.style.borderBottom = 'none';
     eightBit.style.borderBottom = 'none';
-    logo.src = "./images/logo-black.png";
+    logo.src = './images/logo-black.png';
     localStorage.setItem('theme', 'light');
   };
 
@@ -60,18 +60,21 @@ document.addEventListener('DOMContentLoaded', () => {
     darkButton.style.borderBottom = 'none';
     matrix.style.borderBottom = '1px solid var(--textColor)';
     eightBit.style.borderBottom = 'none';
-    logo.src = "./images/logo-white.png";
+    logo.src = './images/logo-white.png';
     localStorage.setItem('theme', 'matrix');
   };
 
   eightBit.onclick = () => {
     if (document.body.classList.value === 'light') {
       body.classList.replace(document.body.classList.value, 'eightBitLight');
-      logo.src = "./images/logo-black.png";
+      logo.src = './images/logo-black.png';
       localStorage.setItem('theme', 'eightBitLight');
-    } else if (document.body.classList.value === 'dark' || document.body.classList.value === 'matrix') {
+    } else if (
+      document.body.classList.value === 'dark' ||
+      document.body.classList.value === 'matrix'
+    ) {
       body.classList.replace(document.body.classList.value, 'eightBitDark');
-      logo.src = "./images/logo-white.png";
+      logo.src = './images/logo-white.png';
       localStorage.setItem('theme', 'eightBitDark');
     }
     lightButton.style.borderBottom = 'none';
@@ -99,6 +102,7 @@ function gridChange(isScreenWide) {
 gridChange(isScreenWide);
 isScreenWide.addListener(gridChange);
 
+const mainDivDisplay = window.getComputedStyle(mainDiv, null).display;
 function terminalInit() {
   let terminal = document.getElementById('terminal');
   let terminalDiv = document.getElementById('terminalDiv');
@@ -117,7 +121,8 @@ function terminalInit() {
     terminalDiv.style.display = 'none';
     terminal.style.borderBottom = 'none';
     if (mainDiv !== null) {
-      mainDiv.style.display = 'flex';
+      console.log(mainDivDisplay);
+      mainDiv.style.display = mainDivDisplay;
     } else {
       mainDivBlock.style.display = 'block';
     }
@@ -171,7 +176,9 @@ function terminalContact() {
   contactHeader.appendChild(contactHeaderText);
   terminalDiv.appendChild(contactHeader);
   let contactSubheader = document.createElement('p');
-  let contactSubheaderText = document.createTextNode('Send a message to my email and I will get in touch with you!');
+  let contactSubheaderText = document.createTextNode(
+    'Send a message to my email and I will get in touch with you!'
+  );
   contactSubheader.className = 'terminal-response-text';
   contactSubheader.appendChild(contactSubheaderText);
   terminalDiv.appendChild(contactSubheader);
@@ -244,7 +251,9 @@ function terminalClear() {
 
 function terminalElse(ele) {
   const terminalDiv = document.getElementById('terminalDiv');
-  let response = document.createTextNode(`-bash: ${ele.value}: command not found. If you feel lost, type help.`);
+  let response = document.createTextNode(
+    `-bash: ${ele.value}: command not found. If you feel lost, type help.`
+  );
   let responseP = document.createElement('p');
   responseP.className = 'terminal-header';
   // let brTag = document.createElement('br');
